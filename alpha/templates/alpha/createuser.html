@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CREATE USER</title>
+    {% load static %}
+    <link href="{% static 'alpha/css/bootstrap.min.css' %}" rel="stylesheet">
+    <script src="{% static 'alpha/js/bootstrap.bundle.min.js' %}" type="text/javascript"></script>
+  </head>
+  <body>
+    <div class="container-lg p-5 my-5 bg-dark text-white" style="align-content:center;">
+      <div class="container">
+        <form action="" method="post" id="form_tag">
+          {% csrf_token %}
+            {% for hidden_field in form.hidden_fields %}
+              {{ hidden_field.errors }}
+              {{ hidden_field }}
+            {% endfor %}
+            {% for field in form.visible_fields %}
+              {{ field.label_tag }}
+                  {{ field.errors }}
+                  {{ field }}
+                  {{ field.help_text }}
+              {% endfor %}
+        <br>
+        <input class="btn btn-primary" type="submit" value="Submit">
+        <input class="btn btn-primary" type="submit" onclick="window.location='{% url 'alpha:index' %}' ; return false;" value="Cancel">
+        </form>
+        <script type="text/javascript">
+          var l1=document.getElementsByTagName('label');
+          for (i=0;i<l1.length;i++){
+            document.getElementsByTagName('label')[i].className+="form-label";
+          }
+          var l2=document.getElementsByTagName('input');
+          for (i=0;i<l2.length-2;i++){
+            document.getElementsByTagName('input')[i].className+="form-control";
+          }
+        </script>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>DELETE</title>
+      {% load static %}
+      <link href="{% static 'alpha/css/bootstrap.min.css' %}" rel="stylesheet">
+      <script src="{% static 'alpha/js/bootstrap.bundle.min.js' %}" type="text/javascript"></script>
+  </head>
+  <body>
+    <div class="container-lg p-5 my-5 bg-dark text-white" style="align-content:center;">
+      <div class="container">
+        <h1>Delete</h1>
+        <p>Are you sure you want to delete the {{ warehouse.name }} ?</p>
+        <form action="" method="POST">
+          {% csrf_token %}
+          <input type="submit" value="Yes, delete.">
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

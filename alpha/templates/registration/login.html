@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login</title>
+    {% load static %}
+    <link href="{% static 'alpha/css/bootstrap.min.css' %}" rel="stylesheet">
+    <script src="{% static 'alpha/js/bootstrap.bundle.min.js' %}" type="text/javascript"></script>
+  </head>
+<body>
+
+<div class="container-lg p-5 my-5 bg-dark text-white" style="align-content:center;">
+<div class="container">
+<form method="post" action="{% url 'login' %}">
+{% csrf_token %}
+{% if form.errors %}
+<p>Email and password doesnt match.</p>
+{% endif %}
+{% for hidden_field in form.hidden_fields %}
+  {{ hidden_field.errors }}
+  {{ hidden_field }}
+{% endfor %}
+{% for field in form.visible_fields %}
+  {{ field.label_tag }}
+      {{ field.errors }}
+      {{ field }}
+      {{ field.help_text }}
+      <br>
+{% endfor %}
+<input type="submit" class="btn btn-primary" value="Login" />
+<input class="btn btn-primary" type="submit" onclick="window.location='{% url 'alpha:index' %}' ; return false;" value="Cancel">
+<input type="hidden" name="next" value="{{ next }}" />
+</form>
+<script type="text/javascript">
+  var l1=document.getElementsByTagName('label');
+  for (i=0;i<l1.length;i++){
+    document.getElementsByTagName('label')[i].className+="form-label";
+  }
+  var l2=document.getElementsByTagName('input');
+  for (i=0;i<3;i++){
+    document.getElementsByTagName('input')[i].className+="form-control";
+  }
+</script>
+<br>
+<span>Not registered yet???? </span><a class="btn btn-primary"href="{% url 'alpha:createuser' %}">Sign Up</a>
+</div>
+</div>
+</body>
